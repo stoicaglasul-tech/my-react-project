@@ -70,21 +70,34 @@ export default function Checkout() {
     window.scrollTo(0, 0);
   };
 
+  const [payStage, setPayStage] = useState(null); // null | 'processing' | 'success' | 'declined'
+
   const placeOrder = () => {
     setPlacing(true);
+    setPayStage('processing');
+    // Simulate ~2s processing, then 90% success / 10% decline
     setTimeout(() => {
-      const order = {
-        id: 'ORD-' + Date.now(),
-        date: new Date().toLocaleDateString(),
-        items: [...cart],
-        total,
-        shipping: form,
-      };
-      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-      localStorage.setItem('orders', JSON.stringify([...orders, order]));
-      dispatch({ type: 'CART_CLEAR' });
-      navigate('/order-confirmation', { state: { order } });
-    }, 1400);
+      const success = Math.random() > 0.1;
+      if (success) {
+        setPayStage('success');
+        setTimeout(() => {
+          const order = {
+            id: 'ORD-' + Date.now(),
+            date: new Date().toLocaleDateString(),
+            items: [...cart],
+            total,
+            shipping: form,
+          };
+          const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+          localStorage.setItem('orders', JSON.stringify([...orders, order]));
+          dispatch({ type: 'CART_CLEAR' });
+          navigate('/order-confirmation', { state: { order } });
+        }, 1800);
+      } else {
+        setPayStage('declined');
+        setPlacing(false);
+      }
+    }, 2200);
   };
 
   const Field = ({ label, name, type = 'text', placeholder, format }) => (
@@ -226,6 +239,39 @@ export default function Checkout() {
             </div>
           )}
         </div>
+
+        {/* Payment popup */}
+        {payStage && (
+          <div className="pay-overlay">
+            <div className="pay-modal">
+              {payStage === 'processing' && (
+                <>
+                  <div className="pay-spinner-ring" />
+                  <h3>Processing Payment</h3>
+                  <p>Please wait while we securely process your card…</p>
+                  <div className="pay-progress"><div className="pay-progress-bar" /></div>
+                </>
+              )}
+              {payStage === 'success' && (
+                <>
+                  <div className="pay-icon pay-icon--success">✓</div>
+                  <h3>Payment Approved!</h3>
+                  <p>Your order has been placed. Redirecting to confirmation…</p>
+                </>
+              )}
+              {payStage === 'declined' && (
+                <>
+                  <div className="pay-icon pay-icon--fail">✕</div>
+                  <h3>Payment Declined</h3>
+                  <p>Your card was declined. Please check your details and try again.</p>
+                  <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => { setPayStage(null); setStep(1); }}>
+                    Try Again
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Order summary sidebar */}
         <aside className="co-summary">
