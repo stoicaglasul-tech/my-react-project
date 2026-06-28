@@ -143,13 +143,6 @@ export default function Checkout() {
             ))}
           </div>
 
-          {/* Quick demo shortcut */}
-          {step < 2 && (
-            <button className="quick-demo-btn" onClick={() => { setForm(DEMO_DATA); setErrors({}); setStep(2); window.scrollTo(0,0); }}>
-              ⚡ Quick demo — fill everything &amp; skip to Review
-            </button>
-          )}
-
           {/* Step 0: Shipping */}
           {step === 0 && (
             <div className="co-section">
