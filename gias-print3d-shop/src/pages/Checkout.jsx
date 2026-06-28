@@ -12,6 +12,12 @@ const empty = {
   cardName: '', cardNumber: '', expiry: '', cvv: '',
 };
 
+const DEMO_DATA = {
+  firstName: 'Gia', lastName: 'Stoica', email: 'gia@print3d.com', phone: '+40 721 000 111',
+  address: '12 Florilor Street', city: 'Cluj-Napoca', state: 'Cluj', zip: '400000', country: 'RO',
+  cardName: 'GIA STOICA', cardNumber: '4242 4242 4242 4242', expiry: '12/27', cvv: '123',
+};
+
 function formatCard(val) {
   return val.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
 }
@@ -140,7 +146,10 @@ export default function Checkout() {
           {/* Step 0: Shipping */}
           {step === 0 && (
             <div className="co-section">
-              <h2><FiTruck /> Shipping Information</h2>
+              <div className="co-section-header">
+                <h2><FiTruck /> Shipping Information</h2>
+                <button className="btn btn-ghost autofill-btn" onClick={() => { setForm(f => ({ ...f, ...DEMO_DATA })); setErrors({}); }}>⚡ Autofill demo</button>
+              </div>
               <div className="co-grid-2">
                 <Field label="First Name" name="firstName" placeholder="Jane" />
                 <Field label="Last Name" name="lastName" placeholder="Doe" />
@@ -177,7 +186,10 @@ export default function Checkout() {
           {/* Step 1: Payment */}
           {step === 1 && (
             <div className="co-section">
-              <h2><FiCreditCard /> Payment Details</h2>
+              <div className="co-section-header">
+                <h2><FiCreditCard /> Payment Details</h2>
+                <button className="btn btn-ghost autofill-btn" onClick={() => { setForm(f => ({ ...f, cardName: DEMO_DATA.cardName, cardNumber: DEMO_DATA.cardNumber, expiry: DEMO_DATA.expiry, cvv: DEMO_DATA.cvv })); setErrors({}); }}>⚡ Autofill demo</button>
+              </div>
               <div className="card-preview">
                 <div className="card-preview-chip" />
                 <div className="card-preview-number">{form.cardNumber || '•••• •••• •••• ••••'}</div>
