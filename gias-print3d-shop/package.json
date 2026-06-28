@@ -1,3 +1,5 @@
+
+"homepage": "https://stoicaglasul-tech.github.io/my-react-project",
 "scripts": {
     "dev": "vite",
     "build": "vite build",
