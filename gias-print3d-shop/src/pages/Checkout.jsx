@@ -13,9 +13,9 @@ const empty = {
 };
 
 const DEMO_DATA = {
-  firstName: 'Gia', lastName: 'Stoica', email: 'gia@print3d.com', phone: '+40 721 000 111',
-  address: '12 Florilor Street', city: 'Cluj-Napoca', state: 'Cluj', zip: '400000', country: 'RO',
-  cardName: 'GIA STOICA', cardNumber: '4242 4242 4242 4242', expiry: '12/27', cvv: '123',
+  firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', phone: '+1 555 010 0100',
+  address: '123 Main Street, Apt 4B', city: 'New York', state: 'NY', zip: '10001', country: 'US',
+  cardName: 'JANE DOE', cardNumber: '4242 4242 4242 4242', expiry: '12/27', cvv: '123',
 };
 
 function formatCard(val) {
@@ -142,6 +142,13 @@ export default function Checkout() {
               </div>
             ))}
           </div>
+
+          {/* Quick demo shortcut */}
+          {step < 2 && (
+            <button className="quick-demo-btn" onClick={() => { setForm(DEMO_DATA); setErrors({}); setStep(2); window.scrollTo(0,0); }}>
+              ⚡ Quick demo — fill everything &amp; skip to Review
+            </button>
+          )}
 
           {/* Step 0: Shipping */}
           {step === 0 && (
