@@ -1,18 +1,21 @@
 {
   "name": "gias-print3d-shop",
   "version": "0.1.0",
-  "homepage": "https://stoicagla.github.io/gias-print3d-shop",
+  "private": true,
+  "type": "module",
   "dependencies": {
-    "gh-pages": "^6.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.0.0",
+    "react-icons": "^5.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^6.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   }
 }
