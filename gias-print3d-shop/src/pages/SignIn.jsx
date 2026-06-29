@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import { useApp } from '../context/AppContext';
 import './Auth.css';
@@ -12,6 +12,8 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const { dispatch } = useApp();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || '/';
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
@@ -28,7 +30,7 @@ export default function SignIn() {
 
       if (account || isDemo) {
         dispatch({ type: 'SIGN_IN', payload: account || { name: 'Gia Stoica', email: DEMO.email } });
-        navigate('/');
+        navigate(from, { replace: true });
       } else {
         setError('Invalid email or password.');
       }
@@ -42,7 +44,7 @@ export default function SignIn() {
         <div className="auth-header">
           <Link to="/" className="auth-logo">🖨️ Gia's Print<span>3D</span></Link>
           <h1>Welcome back</h1>
-          <p>Sign in to your account</p>
+          <p>{from !== '/' ? 'Sign in to continue to your cart' : 'Sign in to your account'}</p>
         </div>
 
         {error && <div className="auth-error">{error}</div>}
