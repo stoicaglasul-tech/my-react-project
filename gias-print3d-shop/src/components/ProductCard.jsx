@@ -1,18 +1,24 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiHeart, FiShoppingCart, FiEye } from 'react-icons/fi';
+import { FiHeart, FiShoppingCart, FiCheck, FiEye } from 'react-icons/fi';
 import { useApp } from '../context/AppContext';
 import './ProductCard.css';
 
 export default function ProductCard({ product }) {
   const { wishlist, dispatch } = useApp();
   const inWish = wishlist.some(i => i.id === product.id);
+  const [added, setAdded] = useState(false);
 
   const addToCart = e => {
     e.preventDefault();
+    e.stopPropagation();
     dispatch({ type: 'CART_ADD', payload: product });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
   };
   const toggleWish = e => {
     e.preventDefault();
+    e.stopPropagation();
     dispatch({ type: 'WISH_TOGGLE', payload: product });
   };
 
@@ -50,8 +56,8 @@ export default function ProductCard({ product }) {
         </div>
         <div className="card-footer">
           <span className="card-price">${product.price.toFixed(2)}</span>
-          <button className="btn btn-primary card-cart-btn" onClick={addToCart}>
-            <FiShoppingCart /> Add
+          <button className={`btn card-cart-btn${added ? ' btn-added' : ' btn-primary'}`} onClick={addToCart}>
+            {added ? <><FiCheck /> Added!</> : <><FiShoppingCart /> Add</>}
           </button>
         </div>
       </div>

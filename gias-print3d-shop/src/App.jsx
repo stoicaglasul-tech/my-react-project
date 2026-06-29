@@ -10,9 +10,6 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
-import About from './pages/About';
-import Contact from './pages/Contact';
-
 export default function App() {
   return (
     <div className="app">
@@ -28,8 +25,6 @@ export default function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />

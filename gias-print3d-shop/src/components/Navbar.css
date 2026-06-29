@@ -61,6 +61,29 @@
   width: 16px; height: 16px; font-size: 0.65rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
 }
+.nav-cart-btn {
+  width: auto; padding: 0 12px; gap: 6px; font-size: 0.88rem; font-weight: 600;
+  border-radius: 20px; border: 1.5px solid var(--border); transition: all 0.25s;
+}
+.nav-cart-btn.has-items {
+  background: var(--primary); border-color: var(--primary); color: #fff;
+  box-shadow: 0 0 12px rgba(249,115,22,0.45);
+  animation: cartPulse 2s ease-in-out infinite;
+}
+.nav-cart-btn.has-items:hover {
+  background: var(--primary-light); box-shadow: 0 0 20px rgba(249,115,22,0.6);
+}
+.nav-badge-cart {
+  background: #fff; color: var(--primary);
+}
+.nav-cart-btn:not(.has-items) .nav-badge-cart {
+  background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff;
+}
+@keyframes cartPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(249,115,22,0.45); }
+  50%       { box-shadow: 0 0 22px rgba(249,115,22,0.75); }
+}
+
 .nav-user { display: flex; align-items: center; gap: 6px; }
 .nav-user-name { font-size: 0.85rem; font-weight: 500; color: var(--text2); }
 

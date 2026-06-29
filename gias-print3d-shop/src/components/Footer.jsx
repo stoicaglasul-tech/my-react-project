@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FiGithub, FiTwitter, FiInstagram } from 'react-icons/fi';
+import { FiGithub, FiInstagram, FiMail } from 'react-icons/fi';
 import './Footer.css';
 
 export default function Footer() {
@@ -11,10 +11,13 @@ export default function Footer() {
             🖨️ Gia's Print<span style={{ color: 'var(--primary)' }}>3D</span>
           </span>
           <p>Premium 3D printed objects crafted with care. From art to utility — we print it all.</p>
+          <p className="footer-about">
+            A front-end development project built with React, Vite and React Router. No account needed to browse and shop — just add to cart and check out.
+          </p>
           <div className="footer-socials">
-            <a href="#" aria-label="GitHub"><FiGithub /></a>
-            <a href="#" aria-label="Twitter"><FiTwitter /></a>
+            <a href="https://github.com/stoicaglasul-tech/my-react-project" aria-label="GitHub" target="_blank" rel="noreferrer"><FiGithub /></a>
             <a href="#" aria-label="Instagram"><FiInstagram /></a>
+            <a href="mailto:gia.stoica.office@gmail.com" aria-label="Email"><FiMail /></a>
           </div>
         </div>
         <div className="footer-links">
@@ -33,16 +36,15 @@ export default function Footer() {
             <Link to="/wishlist">Wishlist</Link>
           </div>
           <div className="footer-col">
-            <h4>Info</h4>
-            <Link to="/about">About Us</Link>
-            <Link to="/contact">Contact</Link>
-            <a href="#">Shipping Policy</a>
-            <a href="#">Returns</a>
+            <h4>Contact</h4>
+            <a href="mailto:gia.stoica.office@gmail.com">gia.stoica.office@gmail.com</a>
+            <span className="footer-note">Orders ship within 3–5 business days.</span>
+            <span className="footer-note">Returns accepted within 14 days.</span>
           </div>
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Gia's Print 3D Shop. Made with React.</p>
+        <p>&copy; {new Date().getFullYear()} Gia's Print 3D Shop. Built with React &amp; Vite.</p>
       </div>
     </footer>
   );

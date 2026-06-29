@@ -45,17 +45,15 @@ export default function Navbar() {
         <div className={`navbar-links${open ? ' open' : ''}`}>
           <NavLink to="/" className="nav-link" onClick={() => setOpen(false)}>Home</NavLink>
           <NavLink to="/shop" className="nav-link" onClick={() => setOpen(false)}>Shop</NavLink>
-          <NavLink to="/about" className="nav-link" onClick={() => setOpen(false)}>About</NavLink>
-          <NavLink to="/contact" className="nav-link" onClick={() => setOpen(false)}>Contact</NavLink>
 
           <div className="nav-actions">
             <Link to="/wishlist" className="nav-icon-btn" title="Wishlist" onClick={() => setOpen(false)}>
               <FiHeart />
               {wishlist.length > 0 && <span className="nav-badge">{wishlist.length}</span>}
             </Link>
-            <Link to="/cart" className="nav-icon-btn" title="Cart" onClick={() => setOpen(false)}>
+            <Link to="/cart" className={`nav-icon-btn nav-cart-btn${cartCount > 0 ? ' has-items' : ''}`} title="Cart" onClick={() => setOpen(false)}>
               <FiShoppingCart />
-              {cartCount > 0 && <span className="nav-badge">{cartCount}</span>}
+              {cartCount > 0 && <span className="nav-badge nav-badge-cart">{cartCount}</span>}
             </Link>
             {user ? (
               <div className="nav-user">
